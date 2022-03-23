@@ -1,0 +1,21 @@
+{
+  "name": "drupal/farm_equipment_power",
+  "description": "Power sources for farmOS Equipment",
+  "type": "drupal-module",
+  "homepage": "https://www.drupal.org/project/farm_equipment_power",
+  "license": "GPL-2.0-or-later",
+  "support": {
+      "docs": "https://farmOS.org/guide",
+      "forum": "https://farmOS.discourse.group",
+      "chat": "https://matrix.to/#/#farmOS:matrix.org"
+  },
+  "authors": [
+      {
+          "name": "Hadrián Candela",
+          "email": "hadrian.candela@gmail.com"
+      }
+  ],
+  "require": {
+    "drupal/fraction": "^2.0"
+  }
+}

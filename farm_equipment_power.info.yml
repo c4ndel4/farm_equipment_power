@@ -1,0 +1,8 @@
+name: Powered Equipment
+description: Adds Power to the Equipment asset type.
+type: module
+package: farmOS Contrib
+core_version_requirement: ^9
+dependencies:
+  - farm:farm_equipment_power
+  - farm:farm_equipment

@@ -1,0 +1,7 @@
+name: farmOS Default Power Types
+description: 'Provides default power types: Human, Animal, Combustion, Electric, Other'
+type: module
+package: farmOS Contrib
+core_version_requirement: ^9
+dependencies:
+  - farm:farm_equipment_power

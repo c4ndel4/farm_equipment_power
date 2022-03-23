@@ -1,0 +1,11 @@
+# Schema for power_type config entity.
+farm_equipment_power.power_type.*:
+  type: config_entity
+  label: 'Power source'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
