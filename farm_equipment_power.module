@@ -8,6 +8,8 @@
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Form\FormStateInterface;
+use \Drupal\Core\Field\FieldDefinitionInterface;
 
 
 /**
@@ -51,18 +53,79 @@ function farm_equipment_power_farm_entity_bundle_field_info(EntityTypeInterface 
 
   // Add an Power Type reference field to Equipment.
   if ($entity_type->id() == 'asset' && $bundle == 'equipment') {
+
+    // is_powered boolean field.
+    $options = [
+      'type' => 'boolean',
+      'label' => t('Is powered'),
+      'description' => t('If this equipment is powered, then it can have a power type'),
+      'weight' => [
+      'form' => -50,
+      ],
+    ];
+
+    $fields['is_powered'] = \Drupal::service('farm_field.factory')->baseFieldDefinition($options);
+
     $options = [
         'type' => 'list_string',
         'label' => t('Power source'),
         'allowed_values_function' => 'farm_equipment_power_power_type_field_allowed_values',
-        'required' => TRUE,
         'weight' => [
           'form' => -50,
           'view' => -50,
+
         ],
+        'hidden' => 'view',
     ];
     $fields['power_type'] = \Drupal::service('farm_field.factory')->bundleFieldDefinition($options);
+
   }
 
   return $fields;
+}
+
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function farm_equipment_power_form_asset_equipment_add_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  $form['#attached']['library'][] = 'farm_equipment_power/conditional_fields';
+
+  // Check if the form has the required powered flag.
+  if (isset($form['power_type']) && isset($form['is_powered']) ) {
+  
+    // Set the visible state of the equipment.power_type field.
+    // Only display if flag_powered is checked.
+    $form['power_type']['#states']= [
+        'visible' => [
+          ':input[name="is_powered[value]"]' => ['checked' => TRUE],
+        ],
+        'required' => [
+          ':input[name="is_powered[value]"]' => ['checked' => TRUE],
+        ]];
+  }
+}
+
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function farm_equipment_power_form_asset_equipment_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  
+  $form['#attached']['library'][] = 'farm_equipment_power/conditional_fields';
+
+  // Check if the form has the required powered flag.
+  if (isset($form['power_type']) && isset($form['is_powered']) ) {
+  
+    // Set the visible state of the equipment.power_type field.
+    // Only display if flag_powered is checked.
+    $form['power_type']['#states']= [
+        'visible' => [
+          ':input[name="is_powered[value]"]' => ['checked' => TRUE],
+        ],
+        'required' => [
+          ':input[name="is_powered[value]"]' => ['checked' => TRUE],
+        ]];
+  }
 }
