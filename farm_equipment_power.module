@@ -67,7 +67,6 @@ function farm_equipment_power_farm_entity_bundle_field_info(EntityTypeInterface 
         'type' => 'list_string',
         'label' => t('Power source'),
         'allowed_values_function' => 'farm_equipment_power_power_type_field_allowed_values',
-        'required' => TRUE,
         'weight' => [
           'form' => -50,
           'view' => -50,
@@ -93,6 +92,9 @@ function farm_equipment_power_form_asset_equipment_add_form_alter(&$form, FormSt
     $form['power_type']['#states']= [
         'visible' => [
           ':input[name="is_powered[value]"]' => ['checked' => TRUE],
+        ],
+        'required' => [
+          ':input[name="is_powered[value]"]' => ['checked' => TRUE],
         ]];
   }
 }
@@ -110,6 +112,9 @@ function farm_equipment_power_form_asset_equipment_edit_form_alter(&$form, FormS
     // Only display if flag_powered is checked.
     $form['power_type']['#states']= [
         'visible' => [
+          ':input[name="is_powered[value]"]' => ['checked' => TRUE],
+        ],
+        'required' => [
           ':input[name="is_powered[value]"]' => ['checked' => TRUE],
         ]];
   }
