@@ -84,6 +84,8 @@ function farm_equipment_power_farm_entity_bundle_field_info(EntityTypeInterface 
  */
 function farm_equipment_power_form_asset_equipment_add_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 
+  $form['#attached']['library'][] = 'farm_equipment_power/conditional_fields';
+
   // Check if the form has the required powered flag.
   if (isset($form['power_type']) && isset($form['is_powered']) ) {
   
@@ -104,6 +106,9 @@ function farm_equipment_power_form_asset_equipment_add_form_alter(&$form, FormSt
  * Implements hook_form_FORM_ID_alter().
  */
 function farm_equipment_power_form_asset_equipment_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  
+
+  $form['#attached']['library'][] = 'farm_equipment_power/conditional_fields';
   
   // Check if the form has the required powered flag.
   if (isset($form['power_type']) && isset($form['is_powered']) ) {
