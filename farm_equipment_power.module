@@ -78,3 +78,39 @@ function farm_equipment_power_farm_entity_bundle_field_info(EntityTypeInterface 
 
   return $fields;
 }
+
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function farm_equipment_power_form_asset_equipment_add_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  // Check if the form has the required powered flag.
+  if (isset($form['power_type']) && isset($form['is_powered']) ) {
+  
+    // Set the visible state of the equipment.power_type field.
+    // Only display if flag_powered is checked.
+    $form['power_type']['#states']= [
+        'visible' => [
+          ':input[name="is_powered[value]"]' => ['checked' => TRUE],
+        ]];
+  }
+}
+
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function farm_equipment_power_form_asset_equipment_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  
+  // Check if the form has the required powered flag.
+  if (isset($form['power_type']) && isset($form['is_powered']) ) {
+  
+    // Set the visible state of the equipment.power_type field.
+    // Only display if flag_powered is checked.
+    $form['power_type']['#states']= [
+        'visible' => [
+          ':input[name="is_powered[value]"]' => ['checked' => TRUE],
+        ]];
+  }
+}
