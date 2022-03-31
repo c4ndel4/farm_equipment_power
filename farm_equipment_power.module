@@ -51,6 +51,18 @@ function farm_equipment_power_farm_entity_bundle_field_info(EntityTypeInterface 
 
   // Add an Power Type reference field to Equipment.
   if ($entity_type->id() == 'asset' && $bundle == 'equipment') {
+
+    // is_powered boolean field.
+    $options = [
+      'type' => 'boolean',
+      'label' => t('Is powered'),
+      'description' => t('If this equipment is powered, then it can have a power type'),
+      'weight' => [
+      'form' => -50,
+      ],
+    ];
+    $fields['is_powered'] = \Drupal::service('farm_field.factory')->baseFieldDefinition($options);
+
     $options = [
         'type' => 'list_string',
         'label' => t('Power source'),
