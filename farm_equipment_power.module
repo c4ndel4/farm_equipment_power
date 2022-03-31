@@ -8,6 +8,8 @@
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Field\FieldDefinitionInterface;
 
 
 /**
@@ -109,7 +111,7 @@ function farm_equipment_power_form_asset_equipment_edit_form_alter(&$form, FormS
   
 
   $form['#attached']['library'][] = 'farm_equipment_power/conditional_fields';
-  
+
   // Check if the form has the required powered flag.
   if (isset($form['power_type']) && isset($form['is_powered']) ) {
   
