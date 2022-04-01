@@ -1,0 +1,6 @@
+conditional_fields:
+  version: 0.1
+  js:
+    js/conditional_fields.js: {}
+  dependencies:
+    - core/jquery
