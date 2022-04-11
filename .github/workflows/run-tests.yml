@@ -1,7 +1,7 @@
 name: Run tests
 on:
   schedule:
-    - cron: '0 8 * * *' # Run at 8AM UTC.
+    - cron: '0 5 31 2 *' # Run at 8AM UTC.
   push:
     branches:
       - '1.x'
